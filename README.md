@@ -4,7 +4,8 @@ Vision is an Examination Platform designed to cater to the needs of visually imp
 
 # Setup
 
-1. Install Node: npm install 
+1. Install Node: npm install
+2. Start the development server: npm run dev
 
 
 
