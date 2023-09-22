@@ -22,7 +22,9 @@ function Header() {
         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
       </a>
     </div>
+    
     <div className="flex lg:hidden">
+      
       <button type="button"  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
         <span className="sr-only">Open main menu</span>
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
@@ -31,6 +33,7 @@ function Header() {
       </button>
     </div>
     <div className="hidden lg:flex lg:gap-x-12">
+      <a href="/home" className="text-sm font-semibold leading-6 text-gray-900">Home</a>
       <div className="relative">
         <button type="button" className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded={isDropdownVisible}
             onMouseOver={toggleDropdown}>
@@ -129,7 +132,6 @@ function Header() {
         </div>
       </div>
 
-      <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Features</a>
       <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Blog</a>
       <a href="#" className="text-sm font-semibold leading-6 text-gray-900">About Us</a>
     </div>
