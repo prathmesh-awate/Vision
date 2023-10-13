@@ -11,7 +11,6 @@ const LandingPage = () => {
           <svg viewBox="0 0 1024 1024" className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2" style={{ maskImage: 'radial-gradient(closest-side,white,transparent)' }} aria-hidden="true">  
             <circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="1" />
             <defs>
-             
               <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
                 <stop stopColor="  #D4C1EC" />
                 <stop offset="1" stopColor="#FEF9FF" />

@@ -1,18 +1,13 @@
 from flask import Flask, jsonify, request
-
-import pyttsx3
+from gtts import gTTS
+import os
 import speech_recognition as sr
 import datetime
-
 app = Flask(__name__)
-
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)
-
 def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
+    tts = gTTS(text=audio, lang='en')
+    tts.save("audio.mp3")
+    os.system("mpg321 audio.mp3")
 
 def wishMe():
     hour = int(datetime.datetime.now().hour)
@@ -37,10 +32,13 @@ def takeCommand():
     except Exception as e:
         print("Say that again please...")
         return "None"
+
 @app.route('/get_questions', methods=['GET'])
 def get_questions():
     speak('Hello')
-    print('Hell0')
+    print('Hello')
+    return jsonify({"message": "Hello from get_questions"})
+
 @app.route('/start_exam', methods=['GET'])
 def start_exam():
     speak("Initialising VISION ayye lavdya")
@@ -57,7 +55,7 @@ def start_exam():
         # questions:
         with open("questions.txt", "rt") as f:
             questions = f.readlines()
-        
+
         # answers:
         with open("answers.txt", "rt") as f:
             answers = f.readlines()
@@ -76,4 +74,3 @@ def start_exam():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

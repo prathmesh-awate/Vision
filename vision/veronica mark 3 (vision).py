@@ -1,14 +1,11 @@
-
-import pyttsx3 #pip install pyttsx3
+import pyttsx3
 import speech_recognition as sr #pip install speechRecognition
 import datetime
-
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 # print(voices[1].id)
 engine.setProperty('voice', voices[0].id)
-
 
 def speak(audio):
     engine.say(audio)
@@ -52,10 +49,10 @@ if "yes" in query:
     wishMe()
 
     #questions:
-    f= open(r"C:\Users\DELL\OneDrive\Desktop\Vision\questions.txt", "rt")
+    f= open(r"/questions.txt", "rt")
     a= f.readline()
     #answers:
-    f= open(r"C:\Users\DELL\OneDrive\Desktop\Vision\answers.txt", "rt")
+    f= open(r"/answers.txt", "rt")
     b= f.readline()
 
     speak(a)
