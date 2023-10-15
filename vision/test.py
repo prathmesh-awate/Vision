@@ -1,13 +1,26 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from gtts import gTTS
 import os
 import speech_recognition as sr
 import datetime
+import pygame
+
 app = Flask(__name__)
+
+# Initialize pygame audio
+pygame.mixer.init()
+
 def speak(audio):
     tts = gTTS(text=audio, lang='en')
     tts.save("audio.mp3")
-    os.system("mpg321 audio.mp3")
+
+    # Load and play the audio file using pygame
+    pygame.mixer.music.load("audio.mp3")
+    pygame.mixer.music.play()
+
+    # Wait for the audio to finish playing
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
 
 def wishMe():
     hour = int(datetime.datetime.now().hour)
@@ -36,17 +49,15 @@ def takeCommand():
 @app.route('/get_questions', methods=['GET'])
 def get_questions():
     speak('Hello')
-    print('Hello')
     return jsonify({"message": "Hello from get_questions"})
 
 @app.route('/start_exam', methods=['GET'])
 def start_exam():
-    speak("Initialising VISION ayye lavdya")
+    speak("Initializing VISION")
     speak("Welcome to the examination. Shall we start?")
     query = takeCommand()
     if "yes" in query:
         speak("Okay, all the best")
-
         speak("What is your name?")
         master = takeCommand()
         greeting = wishMe() + f" {master}"
