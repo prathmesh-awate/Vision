@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/common/header/Header";
 
-function Demo() {
-  const [questions, setQuestions] = useState(null);
+function StartExam() {
+  const [commands, setCommands] = useState(null);
+
   useEffect(() => {
-    async function fetchQuestions() {
+    async function fetchCommands() {
       try {
-        const response = await fetch("http://127.0.0.1:5000/get_questions");
+        const response = await fetch("http://127.0.0.1:5000/start_exam");
         if (response.ok) {
           const data = await response.json();
-          setQuestions(data.message);
+          setCommands(data.message);
         } else {
           console.error("Failed to fetch questions.");
         }
@@ -18,7 +19,7 @@ function Demo() {
       }
     }
 
-    fetchQuestions();
+    fetchCommands();
   }, []);
 
   return (
@@ -26,10 +27,10 @@ function Demo() {
     <Header/>
     <div>
       <h1>Questions</h1>
-      {questions && (
+      {commands && (
         <div>
           <p>Message received from the Flask API:</p>
-          <pre>{JSON.stringify(questions, null, 1)}</pre>
+          {JSON.stringify(commands, null, 2)}
         </div>
       )}
     </div>
@@ -37,4 +38,4 @@ function Demo() {
   );
 }
 
-export default Demo;
+export default StartExam;
