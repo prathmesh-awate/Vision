@@ -1,23 +1,29 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
+from flask_cors import CORS
 from gtts import gTTS
 import os
 import speech_recognition as sr
 import datetime
 import pygame
+from io import BytesIO
 
 app = Flask(__name__)
-
+CORS(app)
 # Initialize pygame audio
 pygame.mixer.init()
+
+@app.route('/')
+def dashboard():
+    # You can pass data to your template if needed
+    data = "Hello, World"
+    return render_template('index.html', data=data)
 
 def speak(audio):
     tts = gTTS(text=audio, lang='en')
     tts.save("audio.mp3")
-
     # Load and play the audio file using pygame
     pygame.mixer.music.load("audio.mp3")
     pygame.mixer.music.play()
-
     # Wait for the audio to finish playing
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
@@ -54,32 +60,31 @@ def get_questions():
 @app.route('/start_exam', methods=['GET'])
 def start_exam():
     speak("Initializing VISION")
-    speak("Welcome to the examination. Shall we start?")
-    query = takeCommand()
-    if "yes" in query:
-        speak("Okay, all the best")
-        speak("What is your name?")
-        master = takeCommand()
-        greeting = wishMe() + f" {master}"
-        speak(greeting)
+    speak("Welcome to the examination. Shall we start the exam?")
+    # query = takeCommand() 
+    # if "yes" in query:
+    #     speak("Okay, all the best")
+    #     speak("What is your name?")
+    #     master = takeCommand()
+    #     greeting = wishMe() + f" {master}"
+    #     speak(greeting)
+    #     # questions:
+    #     with open("questions.txt", "rt") as f:
+    #         questions = f.readlines()
 
-        # questions:
-        with open("questions.txt", "rt") as f:
-            questions = f.readlines()
+    #     # answers:
+    #     with open("answers.txt", "rt") as f:
+    #         answers = f.readlines()
 
-        # answers:
-        with open("answers.txt", "rt") as f:
-            answers = f.readlines()
+    #     for question, answer in zip(questions, answers):
+    #         speak(question)
+    #         user_answer = takeCommand().lower()
+    #         if user_answer.strip() == answer.strip():
+    #             speak("Correct")
+    #         else:
+    #             speak("Incorrect")
 
-        for question, answer in zip(questions, answers):
-            speak(question)
-            user_answer = takeCommand().lower()
-            if user_answer.strip() == answer.strip():
-                speak("Correct")
-            else:
-                speak("Incorrect")
-
-        speak("Thank you. Have a good day.")
+    #     speak("Thank you. Have a good day.")
 
     return jsonify({"message": "Exam completed"})
 
