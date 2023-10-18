@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/common/header/Header";
-import './StartExam.css';
 
-function StartExam() {
+function Commands() {
   const [commands, setCommands] = useState(null);
 
   useEffect(() => {
@@ -26,8 +25,9 @@ function StartExam() {
     <>
     <Header/>
     <div>
+      <h1>Questions</h1>
       {commands && (
-        <div className="heading">
+        <div>
           {JSON.stringify(commands, null, 2)}
         </div>
       )}
@@ -36,4 +36,4 @@ function StartExam() {
   );
 }
 
-export default StartExam;
+export default Commands;

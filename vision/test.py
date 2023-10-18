@@ -17,7 +17,6 @@ def dashboard():
     # You can pass data to your template if needed
     data = "Hello, World"
     return render_template('index.html', data=data)
-
 def speak(audio):
     tts = gTTS(text=audio, lang='en')
     tts.save("audio.mp3")
@@ -36,7 +35,7 @@ def wishMe():
         return "Good Afternoon"
     else:
         return "Good Evening"
-
+    
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -51,7 +50,6 @@ def takeCommand():
     except Exception as e:
         print("Say that again please...")
         return "None"
-
 @app.route('/get_questions', methods=['GET'])
 def get_questions():
     speak('Hello')
@@ -59,8 +57,9 @@ def get_questions():
 
 @app.route('/start_exam', methods=['GET'])
 def start_exam():
+    command = "Welcome to the examination. Shall we start the exam?"
     speak("Initializing VISION")
-    speak("Welcome to the examination. Shall we start the exam?")
+    speak(command)
     # query = takeCommand() 
     # if "yes" in query:
     #     speak("Okay, all the best")
@@ -86,7 +85,7 @@ def start_exam():
 
     #     speak("Thank you. Have a good day.")
 
-    return jsonify({"message": "Exam completed"})
+    return jsonify({"message": command})
 
 if __name__ == "__main__":
     app.run(debug=True)
