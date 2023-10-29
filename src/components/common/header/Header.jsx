@@ -33,7 +33,8 @@ function Header() {
       </button>
     </div>
     <div className="hidden lg:flex lg:gap-x-12">
-      <a href="/home" className="text-sm font-semibold leading-6 text-gray-900">Home</a>
+      <a href="/" className="text-sm font-semibold leading-6 text-gray-900">Home</a>
+      
       <div className="relative">
         <button type="button" className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded={isDropdownVisible}
             onMouseOver={toggleDropdown}>
@@ -185,9 +186,9 @@ function Header() {
             <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
             <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</a>
           </div>
-          <div className="py-6">
+          {/* <div className="py-6">
             <a href="#" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
